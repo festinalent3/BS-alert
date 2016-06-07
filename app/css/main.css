@@ -1,9 +1,26 @@
+body {
+	margin: 0;
+}
+
 #mainPopup {
 	padding: 10px;
 	height: 200px;
 	width: 200px;
 	font-family: Helvetica, Ubuntu, Arial, sans-serif;
+	background-color: pink;
+	text-align: center;
 }
+
+#bs-button {
+	border-style:none;
+}
+
+button {
+	background-color: rgba(0, 0, 0, 0);
+	outline: none;
+	cursor: pointer;
+}
+
 h1 {
 	font-size: 2em;
 }

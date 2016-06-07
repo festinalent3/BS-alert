@@ -11,7 +11,15 @@ describe("app", function() {
 
     it("shows BS alert points", function() {
         browser.get('/');
-        $('#bs-button').click();
         expect($('#this-page').getText()).toMatch("This page: 2");
+    });
+
+    it("shows BS alert points", function() {
+        browser.get('/');
+        // use callback since this action is
+        // asynchronous, and we need to wait for it to finish
+        $('#bs-button').click(function() {
+          expect($('#this-page').getText()).toMatch("This page: 3");
+        });
     });
 });

@@ -11,3 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Extras to ignore
+*.swp
+.DS_Store

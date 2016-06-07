@@ -1,7 +1,7 @@
 class ApiConstraints
   def initialize(options)
     @version = options[:version]
-    @default = options[:defualt]
+    @default = options[:default]
   end
 
   def matches?(request)

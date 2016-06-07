@@ -11,3 +11,14 @@ chrome.extension.onMessage.addListener(
   	chrome.pageAction.show(sender.tab.id);
     sendResponse();
   });
+
+// chrome.runtime.onInstalled.addListener(function(info){
+//     //    
+//     // info.reason should contain either "install" or "update"
+
+//     var sessionId = localStorage.getItem("session-id");
+
+//     if(!sessionId){
+//       localStorage.setItem("session-id", "random-session-id");
+//     }
+// });

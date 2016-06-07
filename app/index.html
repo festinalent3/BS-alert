@@ -1,25 +1,18 @@
 <!doctype html>
 <html lang="en" ng-app="bsApp">
 <head>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/Controllers/BSController.js"></script>
 </head>
-
-<style type="text/css">
-#mainPopup {
-	padding: 10px;
-	height: 200px;
-	width: 200px;
-	font-family: Helvetica, Ubuntu, Arial, sans-serif;
-}
-h1 {
-	font-size: 2em;
-}
-</style>
-<body>
+<body ng-controller="BSController as controller">
 	<div id="mainPopup">
 		<h1>Hello team BS!</h1>
-		<p>To shut this popup down, edit the manifest file and remove the "default popup" key. To edit it, just edit ext/browser_action/browser_action.html. The CSS is there, too.</p>
+		<button id="bs-button" ng-click="controller.addAlert()"><img src="css/images/bsButton.png" alt="Bullshit Button"></button>
+		<div id="this-page">
+			This page: {{ controller.alerts.length }}
+		</div>
 	</div>
 </body>
 </html>

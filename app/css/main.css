@@ -1,26 +1,66 @@
 body {
 	margin: 0;
+	background: rgba(59,59,59,1);
+	background: -moz-linear-gradient(top, rgba(59,59,59,1) 0%, rgba(34,32,32,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(59,59,59,1)), color-stop(100%, rgba(34,32,32,1)));
+	background: -webkit-linear-gradient(top, rgba(59,59,59,1) 0%, rgba(34,32,32,1) 100%);
+	background: -o-linear-gradient(top, rgba(59,59,59,1) 0%, rgba(34,32,32,1) 100%);
+	background: -ms-linear-gradient(top, rgba(59,59,59,1) 0%, rgba(34,32,32,1) 100%);
+	background: linear-gradient(to bottom, rgba(59,59,59,1) 0%, rgba(34,32,32,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b3b3b', endColorstr='#222020', GradientType=0 );
 }
 
 #mainPopup {
-	padding: 10px;
-	height: 200px;
-	width: 200px;
-	font-family: Helvetica, Ubuntu, Arial, sans-serif;
-	background-color: pink;
+	height: 280px;
+	width: 135px;
+	/*background-color: #292727;*/
 	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	color: #F2F2F2;
 }
 
 #bs-button {
 	border-style:none;
 }
 
+#bs-reported {
+	height: 125px;
+	border-style:none;
+	margin-top: 10px;
+	background-image: url('images/bsReported.svg');
+	background-size: contain;
+}
+
 button {
 	background-color: rgba(0, 0, 0, 0);
 	outline: none;
 	cursor: pointer;
+	padding-top: 20px;
+}
+
+img {
+	width: 103px;
 }
 
 h1 {
-	font-size: 2em;
+	font-size: 1.6em;
+	color: #DE2020;
+	background-color: #F2F2F2;
+}
+
+h2 {
+	font-size: 2.1em;
+	color: #F2F2F2;
+	line-height: 0;
+}
+
+h3 {
+	margin-top: 105px;
+	font-size: 1.2em;
+	display: inline-block;
+}
+
+p {
+	color: #DE2020;
+	font-size: 16px;
 }

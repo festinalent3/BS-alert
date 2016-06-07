@@ -1,0 +1,31 @@
+{
+  "name": "bs-alert",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd app && ../node_modules/http-server/bin/http-server",
+    "webdriver-manager": "./node_modules/protractor/bin/webdriver-manager",
+    "protractor": "./node_modules/protractor/bin/protractor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/festinalent3/BS-alert.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/festinalent3/BS-alert/issues"
+  },
+  "homepage": "https://github.com/festinalent3/BS-alert#readme",
+  "dependencies": {
+    "http-server": "^0.9.0",
+    "protractor": "^3.3.0"
+  },
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2"
+  }
+}

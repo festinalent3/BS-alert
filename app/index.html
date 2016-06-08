@@ -6,19 +6,19 @@
 </head>
 <body ng-controller="BSController as controller">
 	<div id="mainPopup">
-		<button id="bs-button" ng-show="controller.not_bs" ng-click="controller.addAlert()">
+		<button id="bs-button" ng-hide="controller.checkIfBS();" ng-click="controller.saveAlert()">
 			<img src="css/images/bsButton.svg" alt="Bullshit Button">
 		</button>
-		<div id="bs-reported" ng-show="controller.bs">
+		<div id="bs-reported" ng-show="controller.checkIfBS();">
 			<h3>BULL REPORTED</h3>
-			<p id="regret-link" ng-click="controller.resetAlert()">I changed my mind</p>
+			<p id="regret-link" ng-click="controller.destroyAlert()">I changed my mind</p>
 		</div>
 		<div id="alerts">
 		<h1>ALERTS</h1>
 	</div>
 		<div id="this-page">
 			<p>This page:</p>
-			<h2>{{ controller.alerts.length }}!</h2>
+			<h2>{{ controller.bsData.count }}!</h2>
 		</div>
 	</div>
 </body>
@@ -26,4 +26,6 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers/BSController.js"></script>
+<script src="js/services/BSData.js"></script>
+
 </html>

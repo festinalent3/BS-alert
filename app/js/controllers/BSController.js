@@ -1,58 +1,42 @@
-bsApp.controller('BSController', function($scope) {
+bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $http, BSdata) {
 	var self = this
-	var currentUserId = '098765431';
-	self.bs = false;
-	self.not_bs = true;
+	// self.bsData = BSdata.fetchAll();
+	self.bsData = {count: 2, alerted: false, user_id: '098765431'}
+	var currentUserId = self.bsData.user_id; //Get from db
+	var Tab;
 
-	self.alerts = [
-		{ url: 'www.trump.com', user_id: '123456789' },
-		{ url: 'www.trump.com', user_id: '098765431'}
-	];
+	chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
+		Tab = tab[0];
+	});
 
-	self.getTab = function() {
-		  chrome.tabs.query({active:true}, function(tab) {
-			self.saveAlert(tab[0]);
+	self.saveAlert = function(tab) {
+		self.bsData.alerted = true; //To make window image load faster
+		var data = {
+			url: Tab.url,
+			alerted: true,
+			user_id: currentUserId,
+			count: self.bsData.count += 1
+		}
+		BSdata.postToServer(data).success(function(data, status) {
+			self.bsData = data;
 		});
 	};
 
-	self.saveAlert = function(tab) {
-		// angular is not aware of what happens in a callback
-		// (in the future)
-		// so we need to manually tell angular to "apply" the
-		// the changes
-		$scope.$apply(function(){
-			self.alerts.push( { url: tab.url, user_id: currentUserId} );
-			self.checkIfBS();
-   });
-	}
-
-	self.addAlert = function(url) {
-		self.getTab();
+	self.destroyAlert = function(tab) {
+		var data = {
+			url: Tab.url,
+			alerted: false,
+			user_id: currentUserId,
+			count: self.bsData.count -= 1
+		}
+		BSdata.postToServer(data).success(function(data, status) {
+			self.bsData = data;
+		});
 	};
 
 	self.checkIfBS = function(){
-		var thisAlert = self.alerts.find(function(alert) {
-				return alert.user_id === currentUserId;
-		});
-			if(thisAlert.user_id === currentUserId) {
-				self.bs = true;
-				self.not_bs = false;
-
-				return true;
-			}
-			else {
-				self.bs = false;
-				self.not_bs = true;
-
-				return false;
-			}
+		return self.bsData.alerted;
 	};
 
-	self.resetAlert = function() {
-		self.bs = false;
-		self.not_bs = true;
-		self.alerts.pop()
-	}
 
-
-});
+}]);

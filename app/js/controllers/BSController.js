@@ -4,8 +4,6 @@ bsApp.controller('BSController', function($scope) {
 	self.bs = false;
 	self.not_bs = true;
 
-
-
 	self.alerts = [
 		{ url: 'www.trump.com', user_id: '123456789' },
 		{ url: 'www.trump.com', user_id: '098765431'}
@@ -49,6 +47,12 @@ bsApp.controller('BSController', function($scope) {
 				return false;
 			}
 	};
+
+	self.resetAlert = function() {
+		self.bs = false;
+		self.not_bs = true;
+		self.alerts.pop()
+	}
 
 
 });

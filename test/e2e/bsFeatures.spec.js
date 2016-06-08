@@ -35,4 +35,23 @@ describe("app", function() {
       expect($$('#bs-reported p').getText()).toMatch("I changed my mind");
     });
   });
+
+
+  xit("shows the button again when a user regrets their alert", function() {
+    browser.get('/');
+    $('#bs-button').click();
+    browser.wait(function(){
+      return element(by.id('#regret-link')).isPresent();
+    });
+
+    $('#regret-link').click();
+
+    expect($('#this-page').getText()).toMatch("2!");
+    expect($('#bs-button').isPresent()).toBe(true);
+
+  });
+
+
+
+
 });

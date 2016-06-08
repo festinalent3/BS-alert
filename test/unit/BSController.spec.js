@@ -55,4 +55,11 @@ describe('BSController', function() {
 			// controller.checkIfBS()
 			expect(controller.checkIfBS(alerts)).toEqual(true);
 		})
+
+		it('removes the alert for a url', function() {
+			controller.resetAlert();
+			expect(controller.alerts.length).toEqual(1);
+
+		});
+
 });

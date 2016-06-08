@@ -11,21 +11,35 @@ describe("app", function() {
 
   it("shows BS alert points", function() {
     browser.get('/');
-    expect($('#this-page').getText()).toMatch("2!");
+
+    // browser.executeScript(function() {
+    //   window.chrome.tabs = { query: function() {} };
+    //   return document;
+    // }).then(function(window) {
+    //   console.log('---------------------------')
+    //   console.log(window.chrome.tabs)
+    //   console.log('---------------------------')
+    // });
+
+    var points = $('#this-page h2');
+    var text = points.getText();
+    expect(text).toMatch('2!');
+
+    // expect($('#this-page h2').getText()).toMatch("2!");
   });
 
   it("shows BS alert points", function() {
     browser.get('/');
     // use callback since this action is
     // asynchronous, and we need to wait for it to finish
-    $('#bs-button').click(function() {
-      expect($('#this-page').getText()).toMatch("This page: 3");
+    $('#bs-button').click().then(function() {
+      expect($('#this-page').getText()).toMatch("3!");
     });
   });
   it("shows BS reported after clicking the button", function(){
     browser.get('/');
-    $('#bs-button').click(function() {
-      expect($('#bs-reported').getText()).toEqual("BULL REPORTED");
+    $('#bs-button').click().then(function() {
+      expect($('#bs-reported').getText()).toMatch("BULL REPORTED");
     });
   });
 

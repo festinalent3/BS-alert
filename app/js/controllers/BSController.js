@@ -5,9 +5,17 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 	var currentUserId = self.bsData.user_id; //Get from db
 	var Tab;
 
-	chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
-		Tab = tab[0];
-	});
+	(function () {
+		if (typeof chrome.tabs !== 'undefined') {
+			chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
+				console.log(tab);
+				Tab = tab[0];
+			});
+		}
+		else {
+			Tab = [{ url: 'www.google.com'}];
+		}
+	})();
 
 	self.saveAlert = function(tab) {
 		self.bsData.alerted = true; //To make window image load faster
@@ -23,6 +31,7 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 	};
 
 	self.destroyAlert = function(tab) {
+		self.bsData.alerted = false; //To make window image load faster
 		var data = {
 			url: Tab.url,
 			alerted: false,

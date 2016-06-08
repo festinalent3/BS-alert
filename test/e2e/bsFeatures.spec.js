@@ -11,7 +11,7 @@ describe("app", function() {
 
     it("shows BS alert points", function() {
         browser.get('/');
-        expect($('#this-page').getText()).toMatch("This page: 2");
+        expect($('#this-page').getText()).toMatch("2!");
     });
 
     it("shows BS alert points", function() {

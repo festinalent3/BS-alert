@@ -8,8 +8,8 @@ bsApp.controller('BSController', function($scope) {
 	];
 
 	self.getTab = function() {
-		chrome.tabs.query({active:true}, function(tab) {
-			self.saveAlert(tab);
+		  chrome.tabs.query({active:true}, function(tab) {
+			self.saveAlert(tab[0]);
 		});
 	};
 
@@ -18,6 +18,7 @@ bsApp.controller('BSController', function($scope) {
 		// (in the future)
 		// so we need to manually tell angular to "apply" the
 		// the changes
+		debugger
 		$scope.$apply(function(){
 			self.alerts.push( { url: tab.url, user_id: 'user_id'} );
 			console.log(self.alerts);
@@ -26,7 +27,5 @@ bsApp.controller('BSController', function($scope) {
 
 	self.addAlert = function(url) {
 		self.getTab();
-		// window.alert('tada');
-
 	};
 });

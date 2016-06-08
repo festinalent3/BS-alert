@@ -1,6 +1,9 @@
 bsApp.controller('BSController', function($scope) {
 	var self = this
 	var currentUserId = '098765431';
+	self.bs = false;
+	self.not_bs = true;
+
 
 
 	self.alerts = [
@@ -34,10 +37,16 @@ bsApp.controller('BSController', function($scope) {
 				return alert.user_id === currentUserId;
 		});
 			if(thisAlert.user_id === currentUserId) {
+				self.bs = true;
+				self.not_bs = false;
+
 				return true;
 			}
 			else {
-				return false; 
+				self.bs = false;
+				self.not_bs = true;
+
+				return false;
 			}
 	};
 

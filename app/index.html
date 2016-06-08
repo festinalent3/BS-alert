@@ -6,11 +6,12 @@
 </head>
 <body ng-controller="BSController as controller">
 	<div id="mainPopup">
-		<button id="bs-button" ng-hide="false" ng-click="controller.addAlert()">
+		<button id="bs-button" ng-show="controller.not_bs" ng-click="controller.addAlert()">
 			<img src="css/images/bsButton.svg" alt="Bullshit Button">
 		</button>
-		<div id="bs-reported" ng-hide="true">
+		<div id="bs-reported" ng-show="controller.bs">
 			<h3>BULL REPORTED</h3>
+			<p>I changed my mind</p>
 		</div>
 		<div id="alerts">
 		<h1>ALERTS</h1>
@@ -24,5 +25,5 @@
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="js/app.js"></script>
-<script src="js/Controllers/BSController.js"></script>
+<script src="js/controllers/BSController.js"></script>
 </html>

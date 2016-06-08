@@ -29,10 +29,30 @@ describe('BSController', function() {
 			controller.saveAlert(tab)
 		});
 
-		var alert = { url: 'www.google.com', user_id: 'user_id' };
+		var alert = { url: 'www.google.com', user_id: '098765431' };
 		controller.addAlert();
 		expect(controller.alerts.length).toEqual(3);
 		expect(controller.alerts.pop()).toEqual(alert);
 
 	});
+
+		it('checks if user has reported current url', function() {
+			var alerts = [
+			{ url: 'www.trump.com', user_id: '123456789' },
+			{ url: 'www.trump.com', user_id: '098765431'}
+		];
+
+		var currentUserId = '098765431'
+		function findAlert(alert){
+			return alert.user_id === currentUserId;
+		};
+
+			// spyOn(controller, 'checkIfBS').and.callFake(function(){
+			// alerts.find(findAlert)
+			// // controller.isBS=true
+
+		// });
+			// controller.checkIfBS()
+			expect(controller.checkIfBS(alerts)).toEqual(true);
+		})
 });

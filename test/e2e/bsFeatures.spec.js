@@ -22,4 +22,11 @@ describe("app", function() {
           expect($('#this-page').getText()).toMatch("This page: 3");
         });
     });
+    it("shows BS reported after clicking the button", function(){
+        browser.get('/');
+        $('#bs-button').click(function() {
+          expect($('#bs-reported').getText()).toMatch("BULL REPORTED");
+        });
+
+    });
 });

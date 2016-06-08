@@ -1,6 +1,7 @@
 bsApp.controller('BSController', function($scope) {
-	var self = this;
-	var lastTab;
+	var self = this
+	var currentUserId = '098765431';
+
 
 	self.alerts = [
 		{ url: 'www.trump.com', user_id: '123456789' },
@@ -18,14 +19,27 @@ bsApp.controller('BSController', function($scope) {
 		// (in the future)
 		// so we need to manually tell angular to "apply" the
 		// the changes
-		debugger
 		$scope.$apply(function(){
-			self.alerts.push( { url: tab.url, user_id: 'user_id'} );
-			console.log(self.alerts);
+			self.alerts.push( { url: tab.url, user_id: currentUserId} );
+			self.checkIfBS();
    });
 	}
 
 	self.addAlert = function(url) {
 		self.getTab();
 	};
+
+	self.checkIfBS = function(){
+		var thisAlert = self.alerts.find(function(alert) {
+				return alert.user_id === currentUserId;
+		});
+			if(thisAlert.user_id === currentUserId) {
+				return true;
+			}
+			else {
+				return false; 
+			}
+	};
+
+
 });

@@ -2,17 +2,27 @@
 <html lang="en" ng-app="bsApp">
 <head>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script src="bower_components/angular/angular.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/Controllers/BSController.js"></script>
+
 </head>
 <body ng-controller="BSController as controller">
 	<div id="mainPopup">
-		<h1>Hello team BS!</h1>
-		<button id="bs-button" ng-click="controller.addAlert()"><img src="css/images/bsButton.png" alt="Bullshit Button"></button>
+		<button id="bs-button" ng-hide="false" ng-click="controller.addAlert()">
+			<img src="css/images/bsButton.svg" alt="Bullshit Button">
+		</button>
+		<div id="bs-reported" ng-hide="true">
+			<h3>BULL REPORTED</h3>
+		</div>
+		<div id="alerts">
+		<h1>ALERTS</h1>
+	</div>
 		<div id="this-page">
-			This page: {{ controller.alerts.length }}
+			<p>This page:</p>
+			<h2>{{ controller.alerts.length }}!</h2>
 		</div>
 	</div>
 </body>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="js/app.js"></script>
+<script src="js/Controllers/BSController.js"></script>
 </html>

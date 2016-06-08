@@ -18,7 +18,8 @@
     "default_icon": "icons/icon19.png",
     "default_title": "browser action demo",
     "default_popup": "index.html"
-  }
-
-
+  },
+   "permissions": [
+     "activeTab"
+   ]
 }

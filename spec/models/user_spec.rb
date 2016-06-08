@@ -10,4 +10,9 @@ describe User, :type => :model do
   it { expect(subject).to respond_to(:password_confirmation) }
 
   it { expect(subject).to be_valid }
+
+  describe "when email is not present" do
+    before { @user.email = " " }
+    it { expect(subject).to_not be_valid }
+  end
 end

@@ -23,6 +23,16 @@ body {
 	border-style:none;
 }
 
+#regret-link {
+	cursor: pointer;
+
+}
+
+#regret-link:hover {
+	color: red;
+
+}
+
 #bs-reported {
 	border-style:none;
 	margin-top: 10px;

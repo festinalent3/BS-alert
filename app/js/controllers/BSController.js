@@ -1,14 +1,18 @@
 bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $http, BSdata) {
-	var self = this
+	var self = this;
 	// self.bsData = BSdata.fetchAll();
-	self.bsData = {count: 2, alerted: false, user_id: '098765431'}
-	var currentUserId = self.bsData.user_id; //Get from db
+	self.bsData = {count: 2, alerted: false, ip: '098765431'};
+	var currentUserIP;
 	var Tab;
 
 	(function () {
 		if (typeof chrome.tabs !== 'undefined') {
 			chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
 				Tab = tab[0];
+
+				$http.get('https://api.ipify.org').then(function(ip) {
+                    currentUserIP = ip.data;
+                });
 			});
 		}
 		else {
@@ -21,7 +25,7 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 		var data = {
 			url: Tab.url,
 			alerted: true,
-			user_id: currentUserId,
+			ip: currentUserIP,
 			count: self.bsData.count += 1
 		}
 		BSdata.postToServer(data).success(function(data, status) {
@@ -34,7 +38,7 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 		var data = {
 			url: Tab.url,
 			alerted: false,
-			user_id: currentUserId,
+			ip: currentUserIP,
 			count: self.bsData.count -= 1
 		}
 

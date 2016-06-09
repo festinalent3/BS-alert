@@ -1,7 +1,5 @@
 bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $http, BSdata) {
 	var self = this;
-	// self.bsData = BSdata.fetchAll();
-	self.bsData = {count: 2, alerted: false, ip: '098765431'};
 	var currentUserIP;
 	var Tab;
 
@@ -9,41 +7,45 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 		if (typeof chrome.tabs !== 'undefined') {
 			chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
 				Tab = tab[0];
-
 				$http.get('https://api.ipify.org').then(function(ip) {
-                    currentUserIP = ip.data;
-                });
+					currentUserIP = ip.data;
+					BSdata.fetchAll({ ipaddress: currentUserIP, weburl: Tab.url }).then(_handleResponseFromApi);
+				});
 			});
 		}
 		else {
-			Tab = [{ url: 'www.google.com'}];
+			Tab = [{ url: 'hello'}];
 		}
 	})();
 
+	function _handleResponseFromApi(response) {
+		self.bsData = response.data;
+		console.log(self.bsData);
+	};
+
 	self.saveAlert = function(tab) {
-		self.bsData.alerted = true; //To make window image load faster
+		self.bsData.alerted = true;
+		self.bsData.count += 1
 		var data = {
-			url: Tab.url,
-			alerted: true,
-			ip: currentUserIP,
-			count: self.bsData.count += 1
+			weburl: Tab.url,
+			method: CREATE,
+			ipaddress: currentUserIP
 		}
 		BSdata.postToServer(data).success(function(data, status) {
-			self.bsData = data;
+			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ip: currentUserIP }).then(_handleResponseFromApi);
 		});
 	};
 
 	self.destroyAlert = function(tab) {
-		self.bsData.alerted = false; //To make window image load faster
+		self.bsData.alerted = false;
+		self.bsData.count -= 1
 		var data = {
-			url: Tab.url,
-			alerted: false,
-			ip: currentUserIP,
-			count: self.bsData.count -= 1
+			weburl: Tab.url,
+			method: DESTROY,
+			ipaddress: currentUserIP
 		}
-
 		BSdata.postToServer(data).success(function(data, status) {
-			self.bsData = data;
+			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ip: currentUserIP }).then(_handleResponseFromApi);
 		});
 	};
 }]);

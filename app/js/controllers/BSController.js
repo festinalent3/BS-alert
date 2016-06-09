@@ -8,7 +8,6 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 	(function () {
 		if (typeof chrome.tabs !== 'undefined') {
 			chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
-				console.log(tab);
 				Tab = tab[0];
 			});
 		}
@@ -38,14 +37,9 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 			user_id: currentUserId,
 			count: self.bsData.count -= 1
 		}
+
 		BSdata.postToServer(data).success(function(data, status) {
 			self.bsData = data;
 		});
 	};
-
-	self.checkIfBS = function(){
-		return self.bsData.alerted;
-	};
-
-
 }]);

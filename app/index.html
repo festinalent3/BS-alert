@@ -9,12 +9,12 @@
 </head>
 <body ng-controller="BSController as controller">
 	<div id="mainPopup">
-		<button id="bs-button" ng-hide="controller.checkIfBS();" ng-click="controller.saveAlert()">
+		<button id="bs-button" ng-hide="controller.bsData.alerted" ng-click="controller.saveAlert()">
 			<img src="css/images/bsButton.svg" alt="Bullshit Button">
 		</button>
-		<div id="bs-reported" ng-show="controller.checkIfBS();">
+		<div id="bs-reported" ng-show="controller.bsData.alerted">
 			<h3>BULL REPORTED</h3>
-			<p id="regret-link" ng-click="controller.destroyAlert()">I changed my mind</p>
+			<div id="regret-link" ng-click="controller.destroyAlert()">I changed my mind</div>
 		</div>
 		<div id="alerts">
 		<h1>ALERTS</h1>

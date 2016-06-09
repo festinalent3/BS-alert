@@ -1,9 +1,11 @@
 describe("app", function() {
 
-  var mock = require('protractor-http-mock');
+  var mock1 = require('protractor-http-mock');
+  // var mock2 = require('protractor-http-mock');
+
 
   beforeEach(function(){
-    mock([{
+    mock1([{
       request: {
         path: 'https://glacial-mesa-70382.herokuapp.com/domains',
         method: 'GET'
@@ -11,15 +13,28 @@ describe("app", function() {
       response: {
         data: {count: 2, alerted: false}
       }
-    },{
-      request: {
-        path: 'https://glacial-mesa-70382.herokuapp.com/domains',
-        method: 'POST'
-      },
-      response: {
-        data: {count: 3, alerted: true} // 'shows the button again when a user regrets their alert' fails because this count should be 2
-      }
     }]);
+
+
+    // mock2([{
+    //   request: {
+    //     path: 'https://glacial-mesa-70382.herokuapp.com/domains',
+    //     method: 'POST'
+    //   },
+    //   response: {
+    //     data: {count: 3, alerted: true} // 'shows the button again when a user regrets their alert' fails because this count should be 2
+    //   }
+    // }]);
+
+    // {
+    //   request: {
+    //     path: 'https://glacial-mesa-70382.herokuapp.com/domains',
+    //     method: 'POST'
+    //   },
+    //   response: {
+    //     data: {count: 3, alerted: true} // 'shows the button again when a user regrets their alert' fails because this count should be 2
+    //   }
+    // }
   });
 
   it("should say ALERTS", function() {
@@ -72,7 +87,9 @@ describe("app", function() {
   });
 
   afterEach(function(){
-    mock.teardown();
+    mock1.teardown();
+    // mock2.teardown();
+
     // prints the console logs from the app in the protractor output
     // for debugging purposes
     // browser.manage().logs().get('browser').then(function(browserLog) {

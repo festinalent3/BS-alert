@@ -14,7 +14,7 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 			});
 		}
 		else {
-			Tab = [{ url: 'hello'}];
+			Tab = [{ url: 'www.google.com'}];
 		}
 	})();
 
@@ -25,27 +25,26 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 
 	self.saveAlert = function(tab) {
 		self.bsData.alerted = true;
-		self.bsData.count += 1
+		self.bsData.count += 1;
 		var data = {
 			weburl: Tab.url,
-			method: CREATE,
 			ipaddress: currentUserIP
 		}
 		BSdata.postToServer(data).success(function(data, status) {
-			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ip: currentUserIP }).then(_handleResponseFromApi);
+			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ipaddress: currentUserIP }).then(_handleResponseFromApi);
 		});
 	};
 
 	self.destroyAlert = function(tab) {
 		self.bsData.alerted = false;
-		self.bsData.count -= 1
+		self.bsData.count -= 1;
 		var data = {
 			weburl: Tab.url,
-			method: DESTROY,
 			ipaddress: currentUserIP
 		}
-		BSdata.postToServer(data).success(function(data, status) {
-			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ip: currentUserIP }).then(_handleResponseFromApi);
+		BSdata.deleteToServer(data).success(function(data, status) {
+			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ipaddress: currentUserIP }).then(_handleResponseFromApi);
+			conosle.log()
 		});
 	};
 }]);

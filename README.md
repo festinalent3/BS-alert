@@ -1,5 +1,31 @@
 # BS-alert
 
+## Summary
+
+BS Alert is a project aims to give a voice to reasonable people like me and you. With a simple click of a button, you're contributing to the heroic process of cleaning up the internet and reforcing our standard of how online contents should be.
+
+## Contributors
+
+* Emma Sjöström - Bringing judgement upon you all
+* Ivan Bakalov - 
+* Lexi Tran - Provider of happiness
+* Aday Mesa - 
+
+## Instructions
+
+```
+$ git clone https://github.com/festinalent3/BS-alert.git
+$ bower install
+$ npm install
+
+// you might need to update webdriver-manager
+$ ./node_modules/protractor/bin/webdriver-manager update —standalone
+```
+## To set up extention in chrome
+
+* Go to chrome settings
+* Navigate to 'Extentions' on the left hand side
+* Drag and drop the 'app' folder (only) into chrome
 
 ## User Stories
 
@@ -39,3 +65,7 @@ So that I can make sure bots are not taking over
 I would like to only mark an url as BS once
 ```
 
+## Screenshots
+
+![alt tag](http://i.imgur.com/DuycY1s.png)
+![alt tag](http://i.imgur.com/Erlqff1.png)

@@ -1,31 +1,45 @@
-bsApp.controller('BSController', function($scope) {
-	var self = this;
-	var lastTab;
+bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $http, BSdata) {
+	var self = this
+	// self.bsData = BSdata.fetchAll();
+	self.bsData = {count: 2, alerted: false, user_id: '098765431'}
+	var currentUserId = self.bsData.user_id; //Get from db
+	var Tab;
 
-	self.alerts = [
-		{ url: 'www.trump.com', user_id: '123456789' },
-		{ url: 'www.trump.com', user_id: '098765431'}
-	];
+	(function () {
+		if (typeof chrome.tabs !== 'undefined') {
+			chrome.tabs.query({active:true, currentWindow:true}, function(tab) {
+				Tab = tab[0];
+			});
+		}
+		else {
+			Tab = [{ url: 'www.google.com'}];
+		}
+	})();
 
-	self.getTab = function() {
-		  chrome.tabs.query({active:true}, function(tab) {
-			self.saveAlert(tab[0]);
+	self.saveAlert = function(tab) {
+		self.bsData.alerted = true; //To make window image load faster
+		var data = {
+			url: Tab.url,
+			alerted: true,
+			user_id: currentUserId,
+			count: self.bsData.count += 1
+		}
+		BSdata.postToServer(data).success(function(data, status) {
+			self.bsData = data;
 		});
 	};
 
-	self.saveAlert = function(tab) {
-		// angular is not aware of what happens in a callback
-		// (in the future)
-		// so we need to manually tell angular to "apply" the
-		// the changes
-		debugger
-		$scope.$apply(function(){
-			self.alerts.push( { url: tab.url, user_id: 'user_id'} );
-			console.log(self.alerts);
-   });
-	}
+	self.destroyAlert = function(tab) {
+		self.bsData.alerted = false; //To make window image load faster
+		var data = {
+			url: Tab.url,
+			alerted: false,
+			user_id: currentUserId,
+			count: self.bsData.count -= 1
+		}
 
-	self.addAlert = function(url) {
-		self.getTab();
+		BSdata.postToServer(data).success(function(data, status) {
+			self.bsData = data;
+		});
 	};
-});
+}]);

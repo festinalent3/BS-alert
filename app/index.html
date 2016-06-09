@@ -2,27 +2,27 @@
 <html lang="en" ng-app="bsApp">
 <head>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/BSController.js"></script>
+	<script src="js/services/BSData.js"></script>
 </head>
 <body ng-controller="BSController as controller">
 	<div id="mainPopup">
-		<button id="bs-button" ng-hide="false" ng-click="controller.addAlert()">
+		<button id="bs-button" ng-hide="controller.bsData.alerted" ng-click="controller.saveAlert()">
 			<img src="css/images/bsButton.svg" alt="Bullshit Button">
 		</button>
-		<div id="bs-reported" ng-hide="true">
+		<div id="bs-reported" ng-show="controller.bsData.alerted">
 			<h3>BULL REPORTED</h3>
+			<div id="regret-link" ng-click="controller.destroyAlert()">I changed my mind</div>
 		</div>
 		<div id="alerts">
 		<h1>ALERTS</h1>
 	</div>
 		<div id="this-page">
 			<p>This page:</p>
-			<h2>{{ controller.alerts.length }}!</h2>
+			<h2>{{ controller.bsData.count }}!</h2>
 		</div>
 	</div>
 </body>
-
-<script src="bower_components/angular/angular.js"></script>
-<script src="js/app.js"></script>
-<script src="js/Controllers/BSController.js"></script>
 </html>

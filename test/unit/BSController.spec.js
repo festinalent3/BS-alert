@@ -8,31 +8,26 @@ describe('BSController', function() {
 		// $scope, so we need to create one and inject it
 		scope = $rootScope.$new();
 		controller = $controller('BSController', {
-        $scope: scope
-    });
+			$scope: scope
+		});
 	}));
 
 	it('initialises with alerts', function() {
-		var alerts = [
-			{ url: 'www.trump.com', user_id: '123456789' },
-			{ url: 'www.trump.com', user_id: '098765431'}
-		];
-
-		expect(controller.alerts.length).toEqual(2);
+		//This needs to be mocked as soon as we can implement an actual call to an external API
+		expect(controller.bsData.count).toEqual(2);
 	});
 
-	it('add a new alert', function() {
-
-		var tab = { url: 'www.google.com'}
-
-		spyOn(controller, 'getTab').and.callFake(function(){
-			controller.saveAlert(tab)
-		});
-
-		var alert = { url: 'www.google.com', user_id: 'user_id' };
-		controller.addAlert();
-		expect(controller.alerts.length).toEqual(3);
-		expect(controller.alerts.pop()).toEqual(alert);
-
+	it('adds a new alert to the db', function() {
+		var alert = { url: 'www.google.com', user_id: '098765431' };
+		controller.saveAlert(alert);
+		expect(controller.bsData.count).toEqual(3);
+		expect(controller.bsData.user_id).toEqual(alert.user_id);
 	});
+
+	it('removes the alert for a url', function() {
+		var alert = { url: 'www.google.com', user_id: '098765431' };
+		controller.destroyAlert(alert);
+		expect(controller.bsData.count).toEqual(1);
+	});
+
 });

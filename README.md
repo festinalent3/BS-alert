@@ -6,10 +6,10 @@ BS Alert is a project aims to give a voice to reasonable people like me and you.
 
 ## Contributors
 
-Emma Sjöström - Bringing judgement upon you all
-Ivan Bakalov - 
-Lexi Tran - Provider of happiness
-Aday Mesa - 
+* Emma Sjöström - Bringing judgement upon you all
+* Ivan Bakalov - 
+* Lexi Tran - Provider of happiness
+* Aday Mesa - 
 
 ## Instructions
 

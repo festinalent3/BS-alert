@@ -1,7 +1,13 @@
+require 'api_versioning'
+
 Rails.application.routes.draw do
-  resources :domains do
-    resources :alerts
+  namespace :api, defaults: { format: :json } do
+    scope module: :v1, constraints: ApiVersioning.new(version: 1, default: true) do
+      resources :domains, :only => [:index, :create] do
+        resources :alerts, :only => [:index, :create, :destroy]
+      end
+    end
   end
-  resource :alerts
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

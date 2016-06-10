@@ -1,41 +1,41 @@
 describe("app", function() {
 
-  var mock1 = require('protractor-http-mock');
-  // var mock2 = require('protractor-http-mock');
-
+  var mock = require('protractor-http-mock');
 
   beforeEach(function(){
-    mock1([{
+    mock([{
       request: {
         path: 'https://glacial-mesa-70382.herokuapp.com/domains',
-        method: 'GET'
+        method: 'GET',
+        params: { ipaddress: 127.8, weburl: "www.buzzfeed.com" }
       },
       response: {
-        data: {count: 2, alerted: false}
+        data: { data: { count: 2, alerted: false } }
       }
     }]);
+    });
+  //
+//   mock([{
+//     request: {
+//       path: 'https://glacial-mesa-70382.herokuapp.com/api/domains',
+//       method: 'GET',
+//       params: { ipaddress: 127.8, weburl: "www.buzzfeed.com" }
+//     },
+//     response: {
+//       data: {count: 2, alerted: false}
+//     }
+//   },{
+//     request: {
+//       path: 'https://glacial-mesa-70382.herokuapp.com/api/domains',
+//       method: 'POST',
+//       data: { ipaddress: 127.8, weburl: "www.buzzfeed.com" }
+//     },
+//     response: {
+//       data: {count: 3, alerted: true}
+//     }
+//   }]);
+// });
 
-
-    // mock2([{
-    //   request: {
-    //     path: 'https://glacial-mesa-70382.herokuapp.com/domains',
-    //     method: 'POST'
-    //   },
-    //   response: {
-    //     data: {count: 3, alerted: true} // 'shows the button again when a user regrets their alert' fails because this count should be 2
-    //   }
-    // }]);
-
-    // {
-    //   request: {
-    //     path: 'https://glacial-mesa-70382.herokuapp.com/domains',
-    //     method: 'POST'
-    //   },
-    //   response: {
-    //     data: {count: 3, alerted: true} // 'shows the button again when a user regrets their alert' fails because this count should be 2
-    //   }
-    // }
-  });
 
   it("should say ALERTS", function() {
     browser.get('/');
@@ -87,8 +87,7 @@ describe("app", function() {
   });
 
   afterEach(function(){
-    mock1.teardown();
-    // mock2.teardown();
+    mock.teardown();
 
     // prints the console logs from the app in the protractor output
     // for debugging purposes

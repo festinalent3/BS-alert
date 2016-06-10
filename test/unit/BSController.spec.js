@@ -10,22 +10,20 @@ describe('BSController', function() {
 		controller = $controller('BSController', {
 			$scope: scope
 		});
+		controller.bsData = { count: 2, alerted: false}
+		controller.Tab = { url: 'www.google.com' }
 	}));
 
 	it('initialises with alerts', function() {
-		//This needs to be mocked as soon as we can implement an actual call to an external API
 		expect(controller.bsData.count).toEqual(2);
 	});
 
 	it('adds a new alert to the db', function() {
-		var alert = { url: 'www.google.com', user_id: '098765431' };
-		controller.saveAlert(alert);
+		controller.saveAlert();
 		expect(controller.bsData.count).toEqual(3);
-		// expect(controller.bsData.user_id).toEqual(alert.user_id);
 	});
 
 	it('removes the alert for a url', function() {
-		var alert = { url: 'www.google.com', user_id: '098765431' };
 		controller.destroyAlert(alert);
 		expect(controller.bsData.count).toEqual(1);
 	});

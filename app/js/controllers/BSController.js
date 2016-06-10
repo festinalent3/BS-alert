@@ -20,10 +20,9 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 
 	function _handleResponseFromApi(response) {
 		self.bsData = response.data;
-		console.log(self.bsData);
 	};
 
-	self.saveAlert = function(tab) {
+	self.saveAlert = function() {
 		self.bsData.alerted = true;
 		self.bsData.count += 1;
 		var data = {
@@ -35,16 +34,16 @@ bsApp.controller('BSController', ['$scope','$http', 'BSdata', function($scope, $
 		});
 	};
 
-	self.destroyAlert = function(tab) {
+	self.destroyAlert = function() {
 		self.bsData.alerted = false;
 		self.bsData.count -= 1;
 		var data = {
 			weburl: Tab.url,
+			delete: true,
 			ipaddress: currentUserIP
 		}
-		BSdata.deleteToServer(data).success(function(data, status) {
+		BSdata.postToServer(data).success(function(data, status) {
 			self.bsData = BSdata.fetchAll({ weburl: Tab.url, ipaddress: currentUserIP }).then(_handleResponseFromApi);
-			conosle.log()
 		});
 	};
 }]);

@@ -8,23 +8,33 @@ class ApiRequestHandler
 
 
   def create_response
-    if create_alert
-      create_alert
+    alert = create_alert
+    if alert
+      alert
     else
       @alert.errors
     end
   end
 
+  def destroy_alert_response
+    @alert.destroy
+    { state: true, message: "The alert has been deleted" }
+  end
+
   def create_alert
-    if domain_present?
+    if !alert_present? && domain_present?
       alert = @domain.alerts.new(@alert_params)
       return false if !alert.save
       { domain_id: @domain.id, count: @domain.alerts.count, alerted: !!alert }
     else
-      domain = create_domain
-      alert = domain.alerts.new(@alert_params)
-      return false if !alert.save
-      { domain_id: domain.id, count: domain.alerts.count, alerted: !!alert }
+      if alert_present?
+        { errors: "You already have a submission" }
+      else
+        domain = create_domain
+        alert = domain.alerts.new(@alert_params)
+        return false if !alert.save
+        { domain_id: domain.id, count: domain.alerts.count, alerted: !!alert }
+      end
     end
   end
 

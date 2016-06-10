@@ -3,9 +3,7 @@ require 'api_versioning'
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     scope module: :v1, constraints: ApiVersioning.new(version: 1, default: true) do
-      resources :domains, :only => [:index, :create] do
-        resources :alerts, :only => [:index, :create, :destroy]
-      end
+      resources :domains, :only => [:index, :create, :destroy]
     end
   end
   

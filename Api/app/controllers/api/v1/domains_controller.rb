@@ -9,7 +9,11 @@ module Api::V1
 
     # POST /domains
     def create
-      render json: create_apihandler.create_response
+      if !!action_params[:delete]
+        render json: create_apihandler.destroy_alert_response
+      else
+        render json: create_apihandler.create_response
+      end
     end
 
     # DELETE /domains/1
@@ -27,6 +31,10 @@ module Api::V1
         params.permit(:ipaddress)
       end
 
+      def action_params
+        params.permit(:delete)
+      end
+
       def index_apihandler
         domain = Domain.find_by(weburl: params[:weburl])
         alert = Alert.find_by(ipaddress: params[:ipaddress], domain: domain)
@@ -35,7 +43,7 @@ module Api::V1
 
       def create_apihandler
         domain = Domain.find_by(domain_params)
-        alert = Alert.find_by(alert_params, domain: domain)
+        alert = !!domain ?  domain.alerts.find_by(alert_params) : nil
         ApiRequestHandler.new( domain, alert, domain_params[:weburl], alert_params[:ipaddress] )
       end
 

@@ -1,26 +1,41 @@
 describe("app", function() {
 
-  // var mock = require('protractor-http-mock');
+  var mock = require('protractor-http-mock');
+
+  beforeEach(function(){
+    mock([{
+      request: {
+        path: 'https://glacial-mesa-70382.herokuapp.com/domains',
+        method: 'GET',
+        params: { ipaddress: 127.8, weburl: "www.buzzfeed.com" }
+      },
+      response: {
+        data: { data: { count: 2, alerted: false } }
+      }
+    }]);
+    });
   //
-  // beforeEach(function(){
-  //   mock([{
-  //     request: {
-  //       path: 'https://quiet-beach-24792.herokuapp.com/todos.json',
-  //       method: 'GET'
-  //     },
-  //     response: {
-  //       data: {count: 2, alerted: false}
-  //     }
-  //   },{
-  //     request: {
-  //       path: 'http://jsonplaceholder.typicode.com/posts',
-  //       method: 'POST'
-  //     },
-  //     response: {
-  //       data: {count: 3, alerted: true} // 'shows the button again when a user regrets their alert' fails because this count should be 2
-  //     }
-  //   }]);
-  // });
+//   mock([{
+//     request: {
+//       path: 'https://glacial-mesa-70382.herokuapp.com/api/domains',
+//       method: 'GET',
+//       params: { ipaddress: 127.8, weburl: "www.buzzfeed.com" }
+//     },
+//     response: {
+//       data: {count: 2, alerted: false}
+//     }
+//   },{
+//     request: {
+//       path: 'https://glacial-mesa-70382.herokuapp.com/api/domains',
+//       method: 'POST',
+//       data: { ipaddress: 127.8, weburl: "www.buzzfeed.com" }
+//     },
+//     response: {
+//       data: {count: 3, alerted: true}
+//     }
+//   }]);
+// });
+
 
   it("should say ALERTS", function() {
     browser.get('/');
@@ -72,7 +87,8 @@ describe("app", function() {
   });
 
   afterEach(function(){
-    // mock.teardown();
+    mock.teardown();
+
     // prints the console logs from the app in the protractor output
     // for debugging purposes
     // browser.manage().logs().get('browser').then(function(browserLog) {

@@ -2,14 +2,14 @@
 
 ## Summary
 
-BS Alert is a project aims to give a voice to reasonable people like me and you. With a simple click of a button, you're contributing to the heroic process of cleaning up the internet and reforcing our standard of how online contents should be.
+BS Alert is a project aimed to give a voice to reasonable people like me and you. With a simple click of a button, you're contributing to the heroic process of cleaning up the internet and reinforcing our standard of how online contents should be.
 
 ## Contributors
 
 * Emma Sjöström - Bringing judgement upon you all
-* Ivan Bakalov - 
+* Ivan Bakalov - Lurking in the backend
 * Lexi Tran - Provider of happiness
-* Aday Mesa - 
+* Aday Mesa - Mother of shipits
 
 ## Instructions
 
@@ -21,6 +21,10 @@ $ npm install
 // you might need to update webdriver-manager
 $ ./node_modules/protractor/bin/webdriver-manager update —standalone
 ```
+
+You can find the documentation for the API [here](https://github.com/festinalent3/BS-alert/blob/temp/BS-backend.md)
+
+
 ## To set up extention in chrome
 
 * Go to chrome settings
